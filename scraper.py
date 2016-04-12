@@ -14,23 +14,27 @@ import time # For benchmarking
 
 """
 	scrape: Scrape Mike's Lawlorg server for all employees
-	Pre: list must be a valid list
-	Post: Returns a python dict. 
+	Pre: None
+	Post: Returns a python list of JSON objects. 
 """
 def scrape (list):
 	database = []
 	for ID in list:
 		url = 'https://nullify.cc/lawlorg/?search='+ str(ID) 
 		response = urllib2.urlopen(url)
-		database.insert (ID,json.load(response))
-		print (ID)
+		json_obj=json.load(response)
+		print(ID)
+		if len(json_obj)>0:
+			json_obj[0]['ID'] = ID
+			database.append(json_obj[0])
+			print(str (ID)) + " Found"
 	return database
 
 if __name__ == '__main__':
 	startTime = time.time()
-	ids = [223239, 223238, 223634, 223635]
+	ids = range(220000,229999)
+	#ids = [223239, 223238, 223634, 223635]
 	database = scrape(ids)
-	print (database)
 	employees = open('employees.json','w')
 	json.dump(database,employees)
 	endTime = time.time()
