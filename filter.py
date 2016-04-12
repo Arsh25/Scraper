@@ -4,10 +4,14 @@
 	Arsh Chauhan
 	04/11/2016
 	Edited: 04/12/2016
-	filter.py: Removes empty entires from a JSON file
+	filter.py: Filters a dump of Mike's lawlorg DB
 	Made for a UAF Cyber Security Club exercise 
 """
 
+"""
+	TODO: Function to filter by employee name
+		  Funtion to take employee and return ID
+"""
 import json
 import time
 
