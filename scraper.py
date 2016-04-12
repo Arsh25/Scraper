@@ -22,15 +22,16 @@ def scrape (list):
 	for ID in list:
 		url = 'https://nullify.cc/lawlorg/?search='+ str(ID) 
 		response = urllib2.urlopen(url)
-		database.append(json.load(response))
+		database.insert (ID,json.load(response))
+		print (ID)
 	return database
 
 if __name__ == '__main__':
-	startTime = time.clock()
-	ids = [223238, 223239, 223723]
+	startTime = time.time()
+	ids = [223239, 223238, 223634, 223635]
 	database = scrape(ids)
 	print (database)
 	employees = open('employees.json','w')
 	json.dump(database,employees)
-	endTime = time.clock()
+	endTime = time.time()
 	print ('Run Time: ') + str(endTime - startTime)
